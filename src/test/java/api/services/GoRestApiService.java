@@ -1,6 +1,7 @@
 package api.services;
 
 import api.ApiService;
+import io.restassured.response.Response;
 
 public class GoRestApiService extends ApiService {
 
@@ -13,9 +14,11 @@ public class GoRestApiService extends ApiService {
         super("https://gorest.co.in");
     }
 
-    public void getActiveUsers(){
-        get("/public/v2/users?status=active");
+    public Response getActiveUsers(){
+        return get("/public/v2/users?status=active");
     }
 
-
+    public Response getUser(String id){
+        return get("/public/v2/users/"+id);
+    }
 }

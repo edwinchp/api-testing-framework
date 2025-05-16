@@ -1,22 +1,17 @@
 package steps;
 
-import api.ApiService;
-import api.ApiServiceFactory;
+import api.services.GoRestApiService;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
 public class StatusCodesSteps {
 
-    ApiService goRestService = ApiServiceFactory.create("gorest");
+    GoRestApiService goRestService = new GoRestApiService();
 
-    @When("I fetch user with id {int}")
-    public void iFetchUserWithId(int arg0) {
-        Assert.assertEquals("GoRest", goRestService.getServiceName());
-    }
 
-    @Then("the response status should be {int}")
-    public void theResponseStatusShouldBe(int arg0) {
-
+    @When("I fetch user with id {string} the response should be {int}")
+    public void iFetchUserWithId(String id, int statusCode) {
+        goRestService.getUser(id).then().log().all().statusCode(statusCode);
     }
 }
