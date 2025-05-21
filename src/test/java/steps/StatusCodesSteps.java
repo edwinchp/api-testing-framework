@@ -9,9 +9,9 @@ public class StatusCodesSteps {
 
     GoRestApiService goRestService = new GoRestApiService();
 
-
-    @When("I fetch user with id {string} the response should be {int}")
-    public void iFetchUserWithId(String id, int statusCode) {
-        goRestService.getUser(id).then().log().all().statusCode(statusCode);
+    @When("I fetch a valid user id the response should be {int}")
+    public void iFetchAValidUserIdTheResponseShouldBe(int statusCode) {
+        String firstUserId = goRestService.getActiveUsers().then().extract().jsonPath().getString("id[0]");
+        goRestService.getUser(firstUserId).then().log().all().statusCode(statusCode);
     }
 }
