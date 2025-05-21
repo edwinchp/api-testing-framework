@@ -14,4 +14,9 @@ public class StatusCodesSteps {
         String firstUserId = goRestService.getActiveUsers().then().extract().jsonPath().getString("id[0]");
         goRestService.getUser(firstUserId).then().log().all().statusCode(statusCode);
     }
+
+    @When("I create a new user the response should be {int}")
+    public void iCreateANewUserTheResponseShouldBe(int statusCode) {
+        goRestService.createUser().then().statusCode(statusCode);
+    }
 }
