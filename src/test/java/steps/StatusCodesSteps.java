@@ -1,13 +1,13 @@
 package steps;
 
 import api.services.GoRestApiService;
-import io.cucumber.java.en.Then;
+import api.services.WireMockApiService;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
 
 public class StatusCodesSteps {
 
     GoRestApiService goRestService = new GoRestApiService();
+    WireMockApiService wireMockApiService = new WireMockApiService();
 
     @When("I fetch a valid user id the response should be {int}")
     public void iFetchAValidUserIdTheResponseShouldBe(int statusCode) {
@@ -17,6 +17,7 @@ public class StatusCodesSteps {
 
     @When("I create a new user the response should be {int}")
     public void iCreateANewUserTheResponseShouldBe(int statusCode) {
-        goRestService.createUser().then().statusCode(statusCode);
+        wireMockApiService.setWireMockServer();
+        wireMockApiService.mockPostResponse().then().statusCode(statusCode);
     }
 }

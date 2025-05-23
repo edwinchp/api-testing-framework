@@ -27,6 +27,10 @@ public abstract class ApiService {
         return request.body(body).when().post(endpoint);
     }
 
+    protected Response post(String endpoint) {
+        return request.when().post(endpoint);
+    }
+
     protected Response put(String endpoint, Object body) {
         return request.body(body).when().put(endpoint);
     }

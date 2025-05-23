@@ -6,6 +6,8 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
+import java.util.logging.Logger;
+
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features",
@@ -20,6 +22,7 @@ import org.junit.runner.RunWith;
 public class TestRunner {
         @AfterAll
         public static void afterAll() {
+                System.out.println("Teardown MockServer");
                 WireMockApiService.tearDownWireMockServer();
         }
 }
