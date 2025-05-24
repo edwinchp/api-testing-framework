@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features",
-        glue = {"steps", "api"},
+        glue = {"steps", "api", "hooks"},
         tags = "@Test",
         plugin = {
                 "pretty",
@@ -19,10 +19,4 @@ import java.util.logging.Logger;
                 "json:build/cucumber.json"
         }
 )
-public class TestRunner {
-        @AfterAll
-        public static void afterAll() {
-                System.out.println("Teardown MockServer");
-                WireMockApiService.tearDownWireMockServer();
-        }
-}
+public class TestRunner {}
