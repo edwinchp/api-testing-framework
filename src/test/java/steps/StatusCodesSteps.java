@@ -24,4 +24,10 @@ public class StatusCodesSteps {
     public void iCreateANewUserTheResponseShouldBeAccepted(int statusCode) {
         wireMockApiService.mockResponseFor202Code().then().statusCode(statusCode);
     }
+
+    @When("I create a new user the response should be {int} no content")
+    public void iCreateANewUserTheResponseShouldBeNoContent(int statusCode) {
+        String firstUserId = goRestService.getActiveUsers().then().extract().jsonPath().getString("id[0]");
+        goRestService.deleteUser(firstUserId).then().statusCode(statusCode);
+    }
 }
