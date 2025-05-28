@@ -30,4 +30,9 @@ public class StatusCodesSteps {
         String firstUserId = goRestService.getActiveUsers().then().extract().jsonPath().getString("id[0]");
         goRestService.deleteUser(firstUserId).then().statusCode(statusCode);
     }
+
+    @When("I send an incorrect request the response should be {int} bad request")
+    public void iSendAnIncorrectRequestTheResponseShouldBeBadRequest(int statusCode) {
+
+    }
 }
