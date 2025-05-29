@@ -32,6 +32,11 @@ public class GoRestApiService extends ApiService {
         return post("/public/v2/users", goRestUser);
     }
 
+    public Response createUser(String jsonObject){
+        addAuthToken(GOREST_API_AUTH_TOKEN);
+        return post("/public/v2/users```", jsonObject);
+    }
+
     public Response deleteUser(String id){
         addAuthToken(GOREST_API_AUTH_TOKEN);
         return delete("/public/v2/users/"+id);

@@ -2,6 +2,8 @@ package steps;
 
 import api.services.GoRestApiService;
 import api.services.WireMockApiService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.en.When;
 import models.gorest.GoRestUser;
 
@@ -36,13 +38,23 @@ public class StatusCodesSteps {
     @When("I send an incorrect request the response should be {int} bad request")
     public void iSendAnIncorrectRequestTheResponseShouldBeBadRequest(int statusCode) {
         Random rand = new Random();
-        String randomEmail = "ramdomtestuser" + String.valueOf(rand.nextInt(1000) + 1) + "@gmail.com";
+        ObjectMapper mapper = new ObjectMapper();
+        String randomEmail = "ramdomtestuser" + (rand.nextInt(1000) + 1) + "@gmail.com";
+        String brokenJson;
         GoRestUser goRestUser = GoRestUser.builder()
                 .name("Edwin")
                 .email(randomEmail)
                 .gender("Male")
                 .status("active")
                 .build();
-        goRestService.createUser(goRestUser).then().statusCode(201);
+
+        try {
+            String validJson = mapper.writeValueAsString(goRestUser);
+            brokenJson = validJson.substring(0, validJson.length() -1);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        goRestService.createUser(brokenJson).then().statusCode(statusCode);
     }
 }
