@@ -3,9 +3,11 @@ package steps;
 import api.services.GoRestApiService;
 import api.services.WireMockApiService;
 import io.cucumber.java.en.When;
+import models.gorest.GoRestUser;
+
+import java.util.Random;
 
 public class StatusCodesSteps {
-
     GoRestApiService goRestService = new GoRestApiService();
     WireMockApiService wireMockApiService = WireMockApiService.getInstance();
 
@@ -33,6 +35,14 @@ public class StatusCodesSteps {
 
     @When("I send an incorrect request the response should be {int} bad request")
     public void iSendAnIncorrectRequestTheResponseShouldBeBadRequest(int statusCode) {
-
+        Random rand = new Random();
+        String randomEmail = "ramdomtestuser" + String.valueOf(rand.nextInt(1000) + 1) + "@gmail.com";
+        GoRestUser goRestUser = GoRestUser.builder()
+                .name("Edwin")
+                .email(randomEmail)
+                .gender("Male")
+                .status("active")
+                .build();
+        goRestService.createUser(goRestUser).then().statusCode(201);
     }
 }
