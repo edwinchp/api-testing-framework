@@ -19,6 +19,9 @@ public abstract class ApiService {
 
     public abstract String getServiceName();
 
+    protected abstract void addAuthToken(String token);
+
+
     protected Response get(String endpoint) {
         return request.when().get(endpoint);
     }
@@ -39,7 +42,4 @@ public abstract class ApiService {
         return request.when().delete(endpoint);
     }
 
-    protected void addAuthToken(String token){
-        request.header("Authorization", "Bearer " + token);
-    }
 }

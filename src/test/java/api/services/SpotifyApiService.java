@@ -12,4 +12,9 @@ public class SpotifyApiService extends ApiService {
     public String getServiceName() {
         return "";
     }
+
+    @Override
+    protected void addAuthToken(String token) {
+
+    }
 }

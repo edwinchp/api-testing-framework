@@ -15,6 +15,11 @@ public class GoRestApiService extends ApiService {
         return "GoRest";
     }
 
+    @Override
+    protected void addAuthToken(String token) {
+        request.header("Authorization", "Bearer " + token);
+    }
+
     public GoRestApiService() {
         super("https://gorest.co.in");
     }

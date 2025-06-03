@@ -23,6 +23,11 @@ public class WireMockApiService extends ApiService {
         return "WireMockApiService";
     }
 
+    @Override
+    protected void addAuthToken(String token) {
+
+    }
+
     public static WireMockApiService getInstance(){
         if(instance == null){
             synchronized (lock){
