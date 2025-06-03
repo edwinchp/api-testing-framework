@@ -4,8 +4,6 @@ import api.ApiService;
 import io.restassured.response.Response;
 import models.gorest.GoRestUser;
 
-import java.util.Random;
-
 public class GoRestApiService extends ApiService {
 
     private final String GOREST_API_AUTH_TOKEN = System.getenv("GOREST_API_AUTH_TOKEN");

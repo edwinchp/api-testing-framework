@@ -13,6 +13,7 @@ public class SpotifyApiService extends ApiService {
     private final String SPOTIFY_CLIENT_SECRET = System.getenv("SPOTIFY_CLIENT_SECRET");
     private final String SPOTIFY_ACCESS_TOKEN_URL = System.getenv("SPOTIFY_ACCESS_TOKEN_URL");
 
+    private String accessToken;
 
     public SpotifyApiService() {
         super("");
@@ -20,7 +21,7 @@ public class SpotifyApiService extends ApiService {
 
     @Override
     public String getServiceName() {
-        return "";
+        return "SpotifyApiService";
     }
 
     @Override
@@ -33,8 +34,25 @@ public class SpotifyApiService extends ApiService {
                 given()
                         .header("Authorization", "Basic " + base64Credentials)
                         .contentType("application/x-www-form-urlencoded")
-                        .formParam("grand-type", "user-credentials")
+                        .formParam("grant_type", "client_credentials")
                         .when()
                         .post(SPOTIFY_ACCESS_TOKEN_URL);
+
+        response.then().log().all();
+
+        accessToken = response.jsonPath().getString("access_token");
+        System.out.println("ACCESS TOKEN");
+        System.out.println("accessToken = " + accessToken);
+    }
+
+    public Response checkAboutMe(){
+        addAuthorization();
+        return given()
+                .auth()
+                .oauth2(accessToken)
+                .baseUri("https://api.spotify.com")
+                .basePath("/v1/me")
+                .when()
+                .get();
     }
 }
