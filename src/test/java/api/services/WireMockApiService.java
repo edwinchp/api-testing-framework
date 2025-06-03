@@ -24,7 +24,7 @@ public class WireMockApiService extends ApiService {
     }
 
     @Override
-    protected void addAuthToken(String token) {
+    protected void addAuthorization() {
 
     }
 

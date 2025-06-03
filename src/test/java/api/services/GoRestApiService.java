@@ -16,8 +16,8 @@ public class GoRestApiService extends ApiService {
     }
 
     @Override
-    protected void addAuthToken(String token) {
-        request.header("Authorization", "Bearer " + token);
+    protected void addAuthorization() {
+        request.header("Authorization", "Bearer " + GOREST_API_AUTH_TOKEN);
     }
 
     public GoRestApiService() {
@@ -33,17 +33,17 @@ public class GoRestApiService extends ApiService {
     }
 
     public Response createUser(GoRestUser goRestUser){
-        addAuthToken(GOREST_API_AUTH_TOKEN);
+        addAuthorization();
         return post("/public/v2/users", goRestUser);
     }
 
     public Response createUser(String jsonObject){
-        addAuthToken(GOREST_API_AUTH_TOKEN);
+        addAuthorization();
         return post("/public/v2/users```", jsonObject);
     }
 
     public Response deleteUser(String id){
-        addAuthToken(GOREST_API_AUTH_TOKEN);
+        addAuthorization();
         return delete("/public/v2/users/"+id);
     }
 }

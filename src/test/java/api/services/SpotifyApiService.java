@@ -14,7 +14,7 @@ public class SpotifyApiService extends ApiService {
     }
 
     @Override
-    protected void addAuthToken(String token) {
+    protected void addAuthorization() {
 
     }
 }

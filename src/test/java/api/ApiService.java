@@ -19,7 +19,7 @@ public abstract class ApiService {
 
     public abstract String getServiceName();
 
-    protected abstract void addAuthToken(String token);
+    protected abstract void addAuthorization();
 
 
     protected Response get(String endpoint) {
