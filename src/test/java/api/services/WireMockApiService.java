@@ -24,9 +24,7 @@ public class WireMockApiService extends ApiService {
     }
 
     @Override
-    protected void addAuthorization() {
-
-    }
+    protected void addAuthorization() { }
 
     public static WireMockApiService getInstance(){
         if(instance == null){

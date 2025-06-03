@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = {"steps", "api", "hooks"},
-        tags = "@Test",
+        tags = "@Test_006",
         plugin = {
                 "pretty",
                 "html:build/cucumber-reports.html",
