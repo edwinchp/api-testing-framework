@@ -9,6 +9,6 @@ public class OauthSteps {
 
     @When("I enter Google credentials the Spotify API allows login access")
     public void iEnterGoogleCredentialsTheSpotifyAPIAllowsLoginAccess() {
-            spotifyApiService.checkAboutMe().then().log().body();
+            spotifyApiService.checkAboutMe().then().log().all();
     }
 }
