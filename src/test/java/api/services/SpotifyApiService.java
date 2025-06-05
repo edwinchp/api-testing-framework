@@ -2,6 +2,7 @@ package api.services;
 
 import api.ApiService;
 import io.restassured.response.Response;
+import lombok.Getter;
 
 import java.util.Base64;
 
@@ -13,10 +14,12 @@ public class SpotifyApiService extends ApiService {
     private final String SPOTIFY_CLIENT_SECRET = System.getenv("SPOTIFY_CLIENT_SECRET");
     private final String SPOTIFY_ACCESS_TOKEN_URL = System.getenv("SPOTIFY_ACCESS_TOKEN_URL");
 
+    @Getter
     private String accessToken;
 
     public SpotifyApiService() {
         super("");
+        addAuthorization();
     }
 
     @Override
@@ -43,8 +46,7 @@ public class SpotifyApiService extends ApiService {
         accessToken = response.jsonPath().getString("access_token");
     }
 
-    public Response getNewReleases(){
-        addAuthorization();
+    public Response getNewReleases(String accessToken){
         return given()
                 .baseUri("https://api.spotify.com")
                 .auth()

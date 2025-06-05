@@ -1,6 +1,7 @@
 package steps;
 
 import api.services.GoRestApiService;
+import api.services.SpotifyApiService;
 import api.services.WireMockApiService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,10 +9,12 @@ import io.cucumber.java.en.When;
 import models.gorest.GoRestUser;
 
 import java.util.Random;
+import java.util.UUID;
 
 public class StatusCodesSteps {
     GoRestApiService goRestService = new GoRestApiService();
     WireMockApiService wireMockApiService = WireMockApiService.getInstance();
+    SpotifyApiService spotifyApiService = new SpotifyApiService();
 
     @When("I fetch a valid user id the response should be {int} ok")
     public void iFetchAValidUserIdTheResponseShouldBeOk(int statusCode) {
@@ -56,5 +59,11 @@ public class StatusCodesSteps {
         }
 
         goRestService.createUser(brokenJson).then().statusCode(statusCode);
+    }
+
+    @When("I send an incorrect Bearer token the response should return {int} unauthorized")
+    public void iSendAnIncorrectBearerTokenTheResponseShouldReturnUnauthorized(int statusCode) {
+        String fakeToken = UUID.randomUUID().toString();
+        spotifyApiService.getNewReleases(fakeToken).then().log().body().statusCode(statusCode);
     }
 }
