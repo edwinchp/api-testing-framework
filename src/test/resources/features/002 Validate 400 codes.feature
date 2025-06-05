@@ -5,5 +5,11 @@ Feature: Validate 400 status codes
     When I send an incorrect request the response should be 400 bad request
 
   @Test @Test_006
-  Scenario: Validate response OAuth authentication
-    When I enter Google credentials the Spotify API allows login access
+  Scenario: Validate Spotify response OAuth authentication
+    When I successfully authenticate then validate the new album releases have the following properties:
+      | name                   |
+      | release_date           |
+      | release_date_precision |
+      | total_tracks           |
+      | type                   |
+      | uri                    |
