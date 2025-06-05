@@ -12,10 +12,10 @@ public class OauthSteps {
 
     SpotifyApiService spotifyApiService = new SpotifyApiService();
 
-    @When("I successfully authenticate then validate the new album releases have the following properties")
+    @When("I successfully authenticate then validate the new album releases have the following properties:")
     public void iSuccessfullyAuthenticateValidateTheNewAlbumReleasesHaveTheFollowingInformation(DataTable properties) {
         List<String> expectedProperties = properties.column(0);
-        List<Map<String, Object>> albumNames = spotifyApiService.checkAboutMe().jsonPath().getList("albums.items");
+        List<Map<String, Object>> albumNames = spotifyApiService.getNewReleases().jsonPath().getList("albums.items");
 
         for (Map<String, Object> album : albumNames) {
             for (String property : expectedProperties) {

@@ -43,7 +43,7 @@ public class SpotifyApiService extends ApiService {
         accessToken = response.jsonPath().getString("access_token");
     }
 
-    public Response checkAboutMe(){
+    public Response getNewReleases(){
         addAuthorization();
         return given()
                 .baseUri("https://api.spotify.com")
