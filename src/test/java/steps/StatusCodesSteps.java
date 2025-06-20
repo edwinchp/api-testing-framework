@@ -24,7 +24,14 @@ public class StatusCodesSteps {
 
     @When("I create a new user the response should be {int} created")
     public void iCreateANewUserTheResponseShouldBeCreated(int statusCode) {
-        wireMockApiService.mockPostResponse().then().statusCode(statusCode);
+        String randomEmail = "ramdomtestuser" + (new Random().nextInt(1000) + 1) + "@gmail.com";
+        GoRestUser goRestUser = GoRestUser.builder()
+                .name("Edwin")
+                .email(randomEmail)
+                .gender("Male")
+                .status("active")
+                .build();
+        goRestService.createUser(goRestUser).then().statusCode(statusCode);
     }
 
     @When("I create a new user the response should be {int} accepted")
