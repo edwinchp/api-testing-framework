@@ -73,4 +73,11 @@ public class StatusCodesSteps {
         String fakeToken = UUID.randomUUID().toString();
         spotifyApiService.getNewReleases(fakeToken).then().log().body().statusCode(statusCode);
     }
+
+    @When("I send request the response should return {int} forbidden")
+    public void iSendRequestTheResponseShouldReturnForbidden(int statusCode) {
+        spotifyApiService.updatePlaylist()
+                .then()
+                .statusCode(statusCode);
+    }
 }

@@ -54,4 +54,14 @@ public class SpotifyApiService extends ApiService {
                 .when()
                 .get("/v1/browse/new-releases");
     }
+
+    public Response updatePlaylist(){
+        addAuthorization();
+        return given()
+                .basePath("https://api.spotify.com")
+                .auth()
+                .oauth2(accessToken)
+                .when()
+                .put("/v1/playlists/3cEYpjA9oz9GiPac4AsH4n");
+    }
 }
