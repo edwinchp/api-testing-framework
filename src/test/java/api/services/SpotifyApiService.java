@@ -41,8 +41,6 @@ public class SpotifyApiService extends ApiService {
                         .when()
                         .post(SPOTIFY_ACCESS_TOKEN_URL);
 
-        response.then().log().all();
-
         accessToken = response.jsonPath().getString("access_token");
     }
 
@@ -55,13 +53,21 @@ public class SpotifyApiService extends ApiService {
                 .get("/v1/browse/new-releases");
     }
 
-    public Response updatePlaylist(){
-        addAuthorization();
+    public Response updatePlaylist(String playlistId){
         return given()
                 .basePath("https://api.spotify.com")
                 .auth()
                 .oauth2(accessToken)
                 .when()
-                .put("/v1/playlists/3cEYpjA9oz9GiPac4AsH4n");
+                .put("/v1/playlists/" + playlistId);
+    }
+
+    public Response getPlaylist(String playlistId){
+        return given()
+                .baseUri("https://api.spotify.com")
+                .auth()
+                .oauth2(accessToken)
+                .when()
+                .get("/v1/playlists/" + playlistId);
     }
 }

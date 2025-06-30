@@ -76,8 +76,18 @@ public class StatusCodesSteps {
 
     @When("I send request the response should return {int} forbidden")
     public void iSendRequestTheResponseShouldReturnForbidden(int statusCode) {
-        spotifyApiService.updatePlaylist()
+        String playListId = "3cEYpjA9oz9GiPac4AsH4n";
+        spotifyApiService.updatePlaylist(playListId)
                 .then()
+                .statusCode(statusCode);
+    }
+
+    @When("I send request the response should return {int} not found")
+    public void iSendRequestTheResponseShouldReturnNotFound(int statusCode) {
+        String playListId = "3cEYpjA9xz9GiPac4AsH4n";
+        spotifyApiService.getPlaylist(playListId)
+                .then()
+                .log().all()
                 .statusCode(statusCode);
     }
 }

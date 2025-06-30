@@ -8,11 +8,15 @@ Feature: Validate 400 status codes
     Scenario: Validate response returns 401 unauthorized
       When I send an incorrect Bearer token the response should return 401 unauthorized
 
-  @Test @Test_008
-    Scenario: Validate response returns 403 forbidden
-      When I send request the response should return 403 forbidden
-
   @Test @Test_007
+  Scenario: Validate response returns 403 forbidden
+    When I send request the response should return 403 forbidden
+
+  @Test @Test_008
+  Scenario: Validate response returns 404 not found
+    When I send request the response should return 404 not found
+
+  @Test @Test_009
   Scenario: Validate Spotify response OAuth authentication
     When I successfully authenticate then validate the new album releases have the following properties:
       | name                   |
