@@ -12,9 +12,7 @@ public abstract class ApiService {
         request = RestAssured.given()
                 .baseUri(baseUri)
                 .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .log()
-                .all();
+                .accept(ContentType.JSON);
     }
 
     public abstract String getServiceName();
@@ -41,5 +39,4 @@ public abstract class ApiService {
     protected Response delete(String endpoint) {
         return request.when().delete(endpoint);
     }
-
 }

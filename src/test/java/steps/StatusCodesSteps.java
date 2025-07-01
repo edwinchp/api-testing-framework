@@ -3,18 +3,21 @@ package steps;
 import api.services.GoRestApiService;
 import api.services.SpotifyApiService;
 import api.services.WireMockApiService;
+import wiremock.server.WireMockServerManager;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.en.When;
 import models.gorest.GoRestUser;
+import wiremock.stubs.ServerErrorStubs;
+import wiremock.stubs.SuccessStubs;
 
 import java.util.Random;
 import java.util.UUID;
 
 public class StatusCodesSteps {
     GoRestApiService goRestService = new GoRestApiService();
-    WireMockApiService wireMockApiService = WireMockApiService.getInstance();
     SpotifyApiService spotifyApiService = new SpotifyApiService();
+    WireMockApiService wireMockApiService = new WireMockApiService();
 
     @When("I fetch a valid user id the response should be {int} ok")
     public void iFetchAValidUserIdTheResponseShouldBeOk(int statusCode) {
@@ -36,7 +39,10 @@ public class StatusCodesSteps {
 
     @When("I create a new user the response should be {int} accepted")
     public void iCreateANewUserTheResponseShouldBeAccepted(int statusCode) {
-        wireMockApiService.mockResponseFor202Code().then().statusCode(statusCode);
+        SuccessStubs successStubs = new SuccessStubs();
+        successStubs.stubAccepted();
+
+        wireMockApiService.postAccepted().then().statusCode(statusCode);
     }
 
     @When("I create a new user the response should be {int} no content")
@@ -89,5 +95,13 @@ public class StatusCodesSteps {
                 .then()
                 .log().all()
                 .statusCode(statusCode);
+    }
+
+    @When("I fetch data from an endpoint the response should be {int} internal server error")
+    public void iFetchDataFromAnEndpointTheResponseShouldBeInternalServerError(int statusCode) {
+        ServerErrorStubs serverErrorStubs = new ServerErrorStubs();
+        serverErrorStubs.stubInternalServerError();
+
+        wireMockApiService.getInternalServerError().then().statusCode(statusCode);
     }
 }

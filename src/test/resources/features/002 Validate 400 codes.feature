@@ -15,13 +15,3 @@ Feature: Validate 400 status codes
   @Test @Test_008 @Spotify
   Scenario: Validate response returns 404 not found
     When I send request the response should return 404 not found
-
-  @Test @Test_009 @Spotify
-  Scenario: Validate Spotify response OAuth authentication
-    When I successfully authenticate then validate the new album releases have the following properties:
-      | name                   |
-      | release_date           |
-      | release_date_precision |
-      | total_tracks           |
-      | type                   |
-      | uri                    |

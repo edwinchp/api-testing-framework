@@ -1,28 +1,26 @@
 package hooks;
 
-import api.services.WireMockApiService;
+import wiremock.server.WireMockServerManager;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 public class WireMockServerHook {
 
-    private WireMockApiService wireMockServer;
-
     @BeforeAll
     public static void beforeAll() {
-        WireMockApiService.getInstance().startWireMockServer();
+        WireMockServerManager.getInstance().startWireMockServer();
     }
 
     @BeforeEach
     public void restartWireMockServer() {
-        wireMockServer = WireMockApiService.getInstance();
+        WireMockServerManager wireMockServer = WireMockServerManager.getInstance();
         wireMockServer.resetStubs();
     }
 
     @AfterAll
     public static void tearDown() {
         System.out.println("Teardown MockServer");
-        WireMockApiService.tearDownWireMockServer();
+        WireMockServerManager.tearDownWireMockServer();
     }
 }
