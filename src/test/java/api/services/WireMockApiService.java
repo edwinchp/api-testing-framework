@@ -26,4 +26,16 @@ public class WireMockApiService extends ApiService {
     public Response getInternalServerError(){
         return get("/wm/v1/internal-server-error/");
     }
+
+    public Response getBadGatewayError(){
+        return get("/wm/v1/bad-gateway-error/");
+    }
+
+    public Response getServiceUnavailableError(){
+        return get("/wm/v1/service-unavailable/");
+    }
+
+    public Response getHttpVersionNotSupportedError(){
+        return get("/wm/v1/http-version-not-supported/");
+    }
 }

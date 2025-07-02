@@ -16,7 +16,6 @@ Feature: Validate 500 status codes
   Scenario: Validate response returns 505 forbidden
     When I fetch data from an endpoint the response should be 505 http method not supported
 
-
   @Test @Test_012 @Spotify
   Scenario: Validate Spotify response OAuth authentication
     When I successfully authenticate then validate the new album releases have the following properties:

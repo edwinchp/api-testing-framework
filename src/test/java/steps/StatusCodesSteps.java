@@ -104,4 +104,28 @@ public class StatusCodesSteps {
 
         wireMockApiService.getInternalServerError().then().statusCode(statusCode);
     }
+
+    @When("I fetch data from an endpoint the response should be {int} bad gateway")
+    public void iFetchDataFromAnEndpointTheResponseShouldBeBadGateway(int statusCode) {
+        ServerErrorStubs serverErrorStubs = new ServerErrorStubs();
+        serverErrorStubs.stubBadGatewayError();
+
+        wireMockApiService.getBadGatewayError().then().statusCode(statusCode);
+    }
+
+    @When("I fetch data from an endpoint the response should be {int} service unavailable")
+    public void iFetchDataFromAnEndpointTheResponseShouldBeServiceUnavailable(int statusCode) {
+        ServerErrorStubs serverErrorStubs = new ServerErrorStubs();
+        serverErrorStubs.stubServiceUnavailable();
+
+        wireMockApiService.getServiceUnavailableError().then().statusCode(statusCode);
+    }
+
+    @When("I fetch data from an endpoint the response should be {int} http method not supported")
+    public void iFetchDataFromAnEndpointTheResponseShouldBeHttpMethodNotSupported(int statusCode) {
+        ServerErrorStubs serverErrorStubs = new ServerErrorStubs();
+        serverErrorStubs.stubHttpVersionNotSupported();
+
+        wireMockApiService.getHttpVersionNotSupportedError().then().statusCode(statusCode);
+    }
 }
