@@ -25,3 +25,11 @@ test {
     //useJUnitPlatform()
     systemProperty "cucumber.options", System.getProperty("cucumber.options")
 }
+
+tasks.register('smokeTest', Test) {
+    include '**/runners/TestRunner.class'
+    systemProperty "cucumber.options", System.getProperty("cucumber.options")
+    // Define los directories necesarios
+    testClassesDirs = sourceSets.test.output.classesDirs
+    classpath = sourceSets.test.runtimeClasspath
+}
