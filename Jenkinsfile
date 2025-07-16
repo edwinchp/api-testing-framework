@@ -7,13 +7,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                echo '⬇️ Cloning Repository...'
-                git url: 'https://github.com/edwinchp/api-testing-framework.git', branch: 'master'
-            }
-        }
-
         stage('Execute tests') {
             steps {
                 echo '🔐 Injecting secrets as environment variables '
